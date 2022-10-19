@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<self:TSE_0401060_D07 metaType="formular" Version="6.0" xmlns:self="http://www.roskazna.ru/eb/domain/TSE_0401060_D07/formular" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<BasicRequisites_DocNum></BasicRequisites_DocNum>
+<BasicRequisites_DocDate></BasicRequisites_DocDate>
+<BasicRequisites_PaySum></BasicRequisites_PaySum>
+<BasicRequisites_PayView code="0" value="Пусто"/>
+<AdditionalInfo_OperType>01</AdditionalInfo_OperType>
+<AdditionalInfo_PayOrder>3</AdditionalInfo_PayOrder>
+<PayerAndRecipient_Payer_INN>9777777777</PayerAndRecipient_Payer_INN>
+<PayerAndRecipient_Payer_KPP>770000000</PayerAndRecipient_Payer_KPP>
+<PayerAndRecipient_Payer_Code>123Я4567</PayerAndRecipient_Payer_Code>
+<PayerAndRecipient_Payer_PersonalAcc>123Я4567890</PayerAndRecipient_Payer_PersonalAcc>
+<PayerAndRecipient_Payer_Name>УФК ПО Г. МОСКВЕ (ООО "Рога&Копыта")</PayerAndRecipient_Payer_Name>
+<PayerAndRecipient_Payer_CheckAcc>03111111111111111111</PayerAndRecipient_Payer_CheckAcc>
+<PayerAndRecipient_Payer_BIK>004444444</PayerAndRecipient_Payer_BIK>
+<PayerAndRecipient_Payer_BankName>ГУ БАНКА РОССИИ ПО ЦФО//УФК ПО Г. МОСКВЕ, г Москва</PayerAndRecipient_Payer_BankName>
+<PayerAndRecipient_Payer_CorrAcc>40101111111111111111</PayerAndRecipient_Payer_CorrAcc>
+<PayerAndRecipient_Recip_INN>000000000000</PayerAndRecipient_Recip_INN>
+<PayerAndRecipient_Recip_KPP>0</PayerAndRecipient_Recip_KPP>
+<PayerAndRecipient_Recip_Name></PayerAndRecipient_Recip_Name>
+<PayerAndRecipient_Recip_CheckAcc></PayerAndRecipient_Recip_CheckAcc>
+<PayerAndRecipient_Recip_BIK></PayerAndRecipient_Recip_BIK>
+<PayerAndRecipient_Recip_BankName></PayerAndRecipient_Recip_BankName>
+<PayerAndRecipient_Recip_CorrAcc></PayerAndRecipient_Recip_CorrAcc>
+<TSE_Tab0401060>
+<TSE_Tab0401060_ITEM>
+<ContractID>0000000002020P0Y0002</ContractID>
+<NumPP>1</NumPP>
+<Obosob>false</Obosob>
+<ViewC code="0" value="Договор"/>
+<DocDate>2022-01-01</DocDate>
+<DocNum>ДОГОВОР-111</DocNum>
+<CodeObjectPayer>0100</CodeObjectPayer>
+<DetCodeObjectPayer>0100001</DetCodeObjectPayer>
+<Sum></Sum>
+<SumNDS>0.00</SumNDS>
+<AnalyticCodePay>21060014</AnalyticCodePay>
+</TSE_Tab0401060_ITEM>
+</TSE_Tab0401060>
+<TranscriptPP_PayPurpose></TranscriptPP_PayPurpose>
+<Sign_Head_Position>ГЕНЕРАЛЬНЫЙ ДИРЕКТОР</Sign_Head_Position>
+<Sign_Head_FIO>СИДОРОВ СИДОР СИДОРОВИЧ</Sign_Head_FIO>
+<Sign_ChiefAccountant_FIO>Иванова Мария Ивановна</Sign_ChiefAccountant_FIO>
+<Sign_ExecutorClient_FIO>Иванова Мария Ивановна</Sign_ExecutorClient_FIO>
+<Sign_ExecutorClient_ExecutorPhone>4957777777</Sign_ExecutorClient_ExecutorPhone>
+</self:TSE_0401060_D07>
