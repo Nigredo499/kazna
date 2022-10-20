@@ -1,4 +1,6 @@
 from datetime import datetime
+from pathlib import Path
+import xml.etree.ElementTree as ET
 
 
 def collect_pay_info(file: str) -> list:
@@ -26,7 +28,6 @@ def collect_pay_info(file: str) -> list:
     docpack = []
     curdoc = {}
     text = open(file, 'r', encoding='utf-8').read()
-
     for line in text.splitlines()[1:]:
         if line.startswith('КонецДокумента'):
             docpack.append(curdoc)
@@ -57,8 +58,8 @@ def _dm_convert(date) -> str:
 
 
 def _convert36(n) -> str:
-    #  Конвертирует число в 36-ричный формат, возвращая строку из 6-ти символов.
-    #  (соответствие требованиям именования файлов для импорта)
+    # Конвертирует число в 36-ричный формат, возвращая строку из 6-ти символов.
+    # (соответствие требованиям именования файлов для импорта)
     base = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     result = ''
     while n:
@@ -69,6 +70,64 @@ def _convert36(n) -> str:
     return result
 
 
+def create_file(t_dir, m):
+    # Создает XML файлы из шаблона с требуемым именем.
+    # t_dir - директория, куда складываются сформированные XML файлы; перед созданием файлов директория очищается;
+    # m - количество платёжных поручений в выгрузке 1С;
+    files = Path(t_dir).glob('**/*')
+    for file in files:
+        try:
+            file.unlink()
+        except Exception as e:
+            print(f'Failed to delete {file}. Reason: {e}')
+    file_start_num = 1296  # 100 в 36-ричной системе (можно задать любой начальный номер в имени файла)
+    content = read_xml_template()
+    for i in range(m):
+        path = t_dir + file_name(file_start_num + i)
+        with open(path, 'w', encoding='utf-8') as f:
+            for line in content:
+                f.write(line)
+
+
+def read_xml_template():
+    with open('./file_examples/template.XML', 'r', encoding='utf-8') as t:
+        structure = t.readlines()
+    return structure
+
+
+def modify_xml(source: str, start_num: str, pay_purpose: str):
+    # Модифицирует XML файлы, вставляя информацию из выгрузки 1С.
+    # source - путь к файлу выгрузки 1С;
+    # start_num - начальный номер платёжного поручения;
+    # Начальный номер платежки может браться из выгрузки 1С (бухгалтер вводит '0') или задаваться бухгалтером.
+    # pay_purpose - назначение платежа, общий для всех платёжек; вводит бухглатер;
+
+    target_dir = './out/'  # директория, куда складываются сформированные XML файлы
+    pay_order_num = int(start_num)
+    pay_orders = collect_pay_info(source)
+    create_file(target_dir, len(pay_orders))
+    files = list(Path(target_dir).glob('*'))
+
+    for i in range(len(files)):
+        tree = ET.parse(files[i])
+        root = tree.getroot()
+        root.findall('TranscriptPP_PayPurpose')[0].text = pay_purpose
+        if pay_order_num:
+            root.findall('BasicRequisites_DocNum')[0].text = pay_order_num + i
+        else:
+            root.findall('BasicRequisites_DocNum')[0].text = pay_orders[i]['docNum']
+        root.findall('BasicRequisites_DocDate')[0].text = pay_orders[i]['docDate']
+        root.findall('PayerAndRecipient_Recip_Name')[0].text = pay_orders[i]['recip_Name']
+        root.findall('PayerAndRecipient_Recip_INN')[0].text = pay_orders[i]['recip_INN']
+        root.findall('PayerAndRecipient_Recip_CheckAcc')[0].text = pay_orders[i]['recip_CheckAcc']
+        root.findall('PayerAndRecipient_Recip_BIK')[0].text = pay_orders[i]['recip_BIK']
+        root.findall('PayerAndRecipient_Recip_BankName')[0].text = pay_orders[i]['recip_BankName']
+        root.findall('PayerAndRecipient_Recip_CorrAcc')[0].text = pay_orders[i]['recip_CorrAcc']
+        root.findall('BasicRequisites_PaySum')[0].text = pay_orders[i]['paySum']
+        root.findall('./TSE_Tab0401060/TSE_Tab0401060_ITEM/Sum')[0].text = pay_orders[i]['paySum']
+        tree.write(files[i], encoding='utf-8')
+
+
 if __name__ == '__main__':
-    f = '/path/to/1C_file.txt'
-    pay_orders = collect_pay_info(f)
+    f_1c = './file_examples/1C_upload.txt'
+    modify_xml(f_1c, '0', 'заработная плата')
