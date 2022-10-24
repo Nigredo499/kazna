@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-center text-secondary mb-4">{% block title %} Ввод данных {% endblock %}</h1>
+
+<div class="container">
+    <form action="" method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-md-6">
+                <label class="form-label">
+                    <h6 class="text-secondary">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <use xlink:href="/static/img/bootstrap-icons.svg#journal-text"/>
+                        </svg>
+                        Файл выгруженных из 1С платёжных поручений:
+                    </h6>
+                </label>
+            </div>
+            <div class="col-md-6">
+                <labe class="form-label">
+                    <h6 class="text-secondary">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <use xlink:href="/static/img/bootstrap-icons.svg#sort-numeric-down"/>
+                        </svg>
+                        Начальный номер платежного поручения:
+                    </h6>
+                </labe>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <input type="file" class="form-control" name="file" id="file">
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="Начальный номер платёжного поручения" name="snum" id="snum">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <label class="form-label">
+                    <h6 class="text-secondary">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <use xlink:href="/static/img/bootstrap-icons.svg#textarea-t"/>
+                        </svg>
+                        Введите назначение платежа:
+                    </h6>
+                </label>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <input type="text" class="form-control"
+                       placeholder="текст назначения платежа"
+                       name="purpose" id="purpose">
+            </div>
+            <div class="form-text">
+                <em>Пример:</em> Выплата заработной платы.
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-4 offset-md-4" >
+                <button class="btn btn-secondary" type="submit">Сформировать поручения</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

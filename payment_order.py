@@ -1,6 +1,7 @@
 from datetime import datetime
 from pathlib import Path
 import xml.etree.ElementTree as ET
+from zipfile import ZipFile
 
 
 def collect_pay_info(file: str) -> list:
@@ -95,6 +96,14 @@ def read_xml_template():
     return structure
 
 
+def zip_xml_files(dir_name, zip_file_name):
+    # Создает архив с XML файлами
+    with ZipFile(dir_name.joinpath(zip_file_name), 'w') as archive:
+        files = list(Path(dir_name).glob('*.XML'))
+        for file in files:
+            archive.write(file, file.name)
+
+
 def modify_xml(source: str, start_num: str, pay_purpose: str):
     # Модифицирует XML файлы, вставляя информацию из выгрузки 1С.
     # source - путь к файлу выгрузки 1С;
@@ -104,6 +113,7 @@ def modify_xml(source: str, start_num: str, pay_purpose: str):
 
     target_dir = './out/'  # директория, куда складываются сформированные XML файлы
     pay_order_num = int(start_num)
+    print(pay_order_num, type(pay_order_num))
     pay_orders = collect_pay_info(source)
     create_file(target_dir, len(pay_orders))
     files = list(Path(target_dir).glob('*'))
@@ -113,7 +123,7 @@ def modify_xml(source: str, start_num: str, pay_purpose: str):
         root = tree.getroot()
         root.findall('TranscriptPP_PayPurpose')[0].text = pay_purpose
         if pay_order_num:
-            root.findall('BasicRequisites_DocNum')[0].text = pay_order_num + i
+            root.findall('BasicRequisites_DocNum')[0].text = str(pay_order_num + i)
         else:
             root.findall('BasicRequisites_DocNum')[0].text = pay_orders[i]['docNum']
         root.findall('BasicRequisites_DocDate')[0].text = pay_orders[i]['docDate']
@@ -127,7 +137,9 @@ def modify_xml(source: str, start_num: str, pay_purpose: str):
         root.findall('./TSE_Tab0401060/TSE_Tab0401060_ITEM/Sum')[0].text = pay_orders[i]['paySum']
         tree.write(files[i], encoding='utf-8')
 
+    zip_xml_files(Path(target_dir), 'download.zip')
+
 
 if __name__ == '__main__':
-    f_1c = './file_examples/1C_upload.txt'
-    modify_xml(f_1c, '0', 'заработная плата')
+    f_1c = './upload/1C_upload.txt'
+    modify_xml(f_1c, '8', 'заработная плата')

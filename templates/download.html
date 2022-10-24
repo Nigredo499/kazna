@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-center text-secondary mb-4">{% block title %} Сформированный пакет {% endblock %}</h1>
+<div class="container text-center">
+    <a href="/return/" target="_blank">
+        <button class="btn btn-success btn-lg">
+            <svg width="24" height="24">
+                <use xlink:href="/static/img/bootstrap-icons.svg#download"/>
+            </svg>
+            Загрузить
+        </button>
+    </a>
+</div>
+{% endblock %}

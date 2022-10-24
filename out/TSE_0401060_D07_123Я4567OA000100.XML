@@ -1,7 +1,7 @@
 <ns0:TSE_0401060_D07 xmlns:ns0="http://www.roskazna.ru/eb/domain/TSE_0401060_D07/formular" metaType="formular" Version="6.0">
-<BasicRequisites_DocNum>2</BasicRequisites_DocNum>
-<BasicRequisites_DocDate>2022-10-20</BasicRequisites_DocDate>
-<BasicRequisites_PaySum>7777.77</BasicRequisites_PaySum>
+<BasicRequisites_DocNum>8</BasicRequisites_DocNum>
+<BasicRequisites_DocDate>2022-10-24</BasicRequisites_DocDate>
+<BasicRequisites_PaySum>888.88</BasicRequisites_PaySum>
 <BasicRequisites_PayView code="0" value="Пусто" />
 <AdditionalInfo_OperType>01</AdditionalInfo_OperType>
 <AdditionalInfo_PayOrder>3</AdditionalInfo_PayOrder>
@@ -16,11 +16,11 @@
 <PayerAndRecipient_Payer_CorrAcc>40101111111111111111</PayerAndRecipient_Payer_CorrAcc>
 <PayerAndRecipient_Recip_INN>000000000000</PayerAndRecipient_Recip_INN>
 <PayerAndRecipient_Recip_KPP>0</PayerAndRecipient_Recip_KPP>
-<PayerAndRecipient_Recip_Name>Петров Петр Петрович</PayerAndRecipient_Recip_Name>
-<PayerAndRecipient_Recip_CheckAcc>40333333333333333333</PayerAndRecipient_Recip_CheckAcc>
+<PayerAndRecipient_Recip_Name>Иванов Иван Иванович</PayerAndRecipient_Recip_Name>
+<PayerAndRecipient_Recip_CheckAcc>40222222222222222222</PayerAndRecipient_Recip_CheckAcc>
 <PayerAndRecipient_Recip_BIK>044525225</PayerAndRecipient_Recip_BIK>
 <PayerAndRecipient_Recip_BankName>ПАО СБЕРБАНК</PayerAndRecipient_Recip_BankName>
-<PayerAndRecipient_Recip_CorrAcc>30102222222222222222</PayerAndRecipient_Recip_CorrAcc>
+<PayerAndRecipient_Recip_CorrAcc>30101111111111111111</PayerAndRecipient_Recip_CorrAcc>
 <TSE_Tab0401060>
 <TSE_Tab0401060_ITEM>
 <ContractID>0000000002020P0Y0002</ContractID>
@@ -31,12 +31,12 @@
 <DocNum>ДОГОВОР-111</DocNum>
 <CodeObjectPayer>0100</CodeObjectPayer>
 <DetCodeObjectPayer>0100001</DetCodeObjectPayer>
-<Sum>7777.77</Sum>
+<Sum>888.88</Sum>
 <SumNDS>0.00</SumNDS>
 <AnalyticCodePay>21060014</AnalyticCodePay>
 </TSE_Tab0401060_ITEM>
 </TSE_Tab0401060>
-<TranscriptPP_PayPurpose>заработная плата</TranscriptPP_PayPurpose>
+<TranscriptPP_PayPurpose>Выплата заработной платы</TranscriptPP_PayPurpose>
 <Sign_Head_Position>ГЕНЕРАЛЬНЫЙ ДИРЕКТОР</Sign_Head_Position>
 <Sign_Head_FIO>СИДОРОВ СИДОР СИДОРОВИЧ</Sign_Head_FIO>
 <Sign_ChiefAccountant_FIO>Иванова Мария Ивановна</Sign_ChiefAccountant_FIO>
