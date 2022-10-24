@@ -1,6 +1,7 @@
 from datetime import datetime
 from pathlib import Path
 import xml.etree.ElementTree as ET
+from zipfile import ZipFile
 
 
 def collect_pay_info(file: str) -> list:
@@ -95,6 +96,14 @@ def read_xml_template():
     return structure
 
 
+def zip_xml_files(dir_name, zip_file_name):
+    # Создает архив с XML файлами
+    with ZipFile(dir_name.joinpath(zip_file_name), 'w') as archive:
+        files = list(Path(dir_name).glob('*.XML'))
+        for file in files:
+            archive.write(file, file.name)
+
+
 def modify_xml(source: str, start_num: str, pay_purpose: str):
     # Модифицирует XML файлы, вставляя информацию из выгрузки 1С.
     # source - путь к файлу выгрузки 1С;
@@ -126,6 +135,8 @@ def modify_xml(source: str, start_num: str, pay_purpose: str):
         root.findall('BasicRequisites_PaySum')[0].text = pay_orders[i]['paySum']
         root.findall('./TSE_Tab0401060/TSE_Tab0401060_ITEM/Sum')[0].text = pay_orders[i]['paySum']
         tree.write(files[i], encoding='utf-8')
+
+    zip_xml_files(Path(target_dir), 'download.zip')
 
 
 if __name__ == '__main__':
