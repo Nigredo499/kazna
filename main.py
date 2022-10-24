@@ -19,6 +19,7 @@ def upload():
         filename = secure_filename(file.filename)
         upload_file = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(upload_file)
+        print(upload_file)
         modify_xml(upload_file, snum, purpose)
         return render_template('download.html')
     else:

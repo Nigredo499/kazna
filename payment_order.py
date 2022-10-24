@@ -113,6 +113,7 @@ def modify_xml(source: str, start_num: str, pay_purpose: str):
 
     target_dir = './out/'  # директория, куда складываются сформированные XML файлы
     pay_order_num = int(start_num)
+    print(pay_order_num, type(pay_order_num))
     pay_orders = collect_pay_info(source)
     create_file(target_dir, len(pay_orders))
     files = list(Path(target_dir).glob('*'))
@@ -122,7 +123,7 @@ def modify_xml(source: str, start_num: str, pay_purpose: str):
         root = tree.getroot()
         root.findall('TranscriptPP_PayPurpose')[0].text = pay_purpose
         if pay_order_num:
-            root.findall('BasicRequisites_DocNum')[0].text = pay_order_num + i
+            root.findall('BasicRequisites_DocNum')[0].text = str(pay_order_num + i)
         else:
             root.findall('BasicRequisites_DocNum')[0].text = pay_orders[i]['docNum']
         root.findall('BasicRequisites_DocDate')[0].text = pay_orders[i]['docDate']
@@ -140,5 +141,5 @@ def modify_xml(source: str, start_num: str, pay_purpose: str):
 
 
 if __name__ == '__main__':
-    f_1c = './file_examples/1C_upload.txt'
-    modify_xml(f_1c, '0', 'заработная плата')
+    f_1c = './upload/1C_upload.txt'
+    modify_xml(f_1c, '8', 'заработная плата')
